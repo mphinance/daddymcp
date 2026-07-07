@@ -7,6 +7,7 @@
  *   node 04-earnings-radar.mjs
  *   node 04-earnings-radar.mjs 14      # look 14 days out
  */
+import "dotenv/config"; // load a local .env so TD_API_KEY can live in a file
 import { TraderDaddy } from "@traderdaddy/sdk";
 
 const days = Number(process.argv[2] ?? 7);

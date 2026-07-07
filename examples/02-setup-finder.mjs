@@ -8,6 +8,7 @@
  *   node 02-setup-finder.mjs
  *   node 02-setup-finder.mjs momentum
  */
+import "dotenv/config"; // load a local .env so TD_API_KEY can live in a file
 import { TraderDaddy } from "@traderdaddy/sdk";
 
 const screener = process.argv[2] ?? "csp-wheel";

@@ -7,6 +7,7 @@
  *   node 03-gamma-check.mjs
  *   node 03-gamma-check.mjs SPY
  */
+import "dotenv/config"; // load a local .env so TD_API_KEY can live in a file
 import { TraderDaddy } from "@traderdaddy/sdk";
 
 const symbol = (process.argv[2] ?? "SPY").toUpperCase();

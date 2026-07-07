@@ -11,6 +11,7 @@
     "earnings": "node 04-earnings-radar.mjs"
   },
   "dependencies": {
-    "@traderdaddy/sdk": "file:../../traderdaddy-sdk"
+    "@traderdaddy/sdk": "file:../../traderdaddy-sdk",
+    "dotenv": "^16.4.7"
   }
 }

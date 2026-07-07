@@ -6,8 +6,9 @@
  * hit your live account.
  *
  *   node 01-research-recap.mjs
- *   TD_API_KEY=td_live_... node 01-research-recap.mjs
+ *   TD_API_KEY=td_live_... node 01-research-recap.mjs   (or put it in .env)
  */
+import "dotenv/config"; // load a local .env so TD_API_KEY can live in a file
 import { TraderDaddy } from "@traderdaddy/sdk";
 
 const td = new TraderDaddy({ mock: !process.env.TD_API_KEY });
