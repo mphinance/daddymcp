@@ -4,11 +4,11 @@
 > Cursor, ChatGPT) — one-click MCP connector configs, a curated prompt library,
 > and runnable example agents.
 
-**Status:** 🚧 Not built yet — this README is the build brief. The MCP **server**
-already exists (`POST /api/v1/mcp` + OAuth shim); this repo is the packaging,
-configs, and examples around it. The [`@traderdaddy/sdk`](https://github.com/mphinance/traderdaddy-sdk)
-that the example agents ride on is **built and publish-ready (v0.1.0)**, so the
-`examples/` track is unblocked today.
+**Status:** ✅ Built (v0.1.0) — connector configs, a curated prompt library, and
+four runnable keyless example agents. The MCP **server** already exists
+(`POST /api/v1/mcp` + OAuth shim); this repo is the packaging, configs, and
+examples around it, all riding the built-and-publish-ready
+[`@traderdaddy/sdk`](https://github.com/mphinance/traderdaddy-sdk) (v0.1.0).
 
 Part of the [TraderDaddy Pro](https://traderdaddy.pro) open-source family,
 alongside [DaddyBoard](https://github.com/mphinance/daddyboard) (wall display),
