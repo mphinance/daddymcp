@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "traderdaddy": {
+      "url": "https://api.traderdaddy.pro/api/v1/mcp",
+      "headers": {
+        "Authorization": "Bearer td_live_YOUR_KEY_HERE"
+      }
+    }
+  }
+}

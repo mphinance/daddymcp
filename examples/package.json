@@ -1,0 +1,16 @@
+{
+  "name": "daddymcp-examples",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Runnable SDK-grounded example agents for TraderDaddy Pro.",
+  "scripts": {
+    "recap": "node 01-research-recap.mjs",
+    "setups": "node 02-setup-finder.mjs",
+    "gamma": "node 03-gamma-check.mjs",
+    "earnings": "node 04-earnings-radar.mjs"
+  },
+  "dependencies": {
+    "@traderdaddy/sdk": "file:../../traderdaddy-sdk"
+  }
+}

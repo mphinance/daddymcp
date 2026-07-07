@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "traderdaddy": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://api.traderdaddy.pro/api/v1/mcp",
+        "--header",
+        "Authorization: Bearer td_live_YOUR_KEY_HERE"
+      ]
+    }
+  }
+}
