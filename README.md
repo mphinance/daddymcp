@@ -39,12 +39,12 @@ Three tracks, none of which is a new server:
 2. **Prompt library** — curated prompts that show off the tool surface:
    *"what did smart money do today?"*, *"find me a CSP-wheel setup"*,
    *"is SPY gamma positive or negative right now?"*
-3. **Example agents** — small scripts (a plain loop + a LangChain variant) that
-   call the API through [`@traderdaddy/sdk`](https://github.com/mphinance/traderdaddy-sdk)
-   to do multi-step research. They double as living SDK documentation and all
-   run **keyless in demo mode** out of the box.
+3. **Example agents** — four small scripts that call the API through
+   [`@traderdaddy/sdk`](https://github.com/mphinance/traderdaddy-sdk) to do
+   multi-step research. They double as living SDK documentation and all run
+   **keyless in demo mode** out of the box.
 
-## Proposed repo layout
+## Repo layout
 
 ```
 daddymcp/
@@ -52,14 +52,14 @@ daddymcp/
   connectors/
     claude-desktop.json         # mcpServers config (via mcp-remote bridge)
     cursor.json                 # ~/.cursor/mcp.json — native remote url+headers
-    claude-connectors.md        # OAuth-shim walkthrough (+ screenshots)
+    claude-connectors.md        # OAuth-shim walkthrough
     generic.md                  # any MCP client: endpoint, auth, tool list
   prompts/
     README.md                   # curated prompt library, grouped by tool
   examples/
     package.json                # depends on @traderdaddy/sdk
     01-research-recap.mjs       # morning brief: marketStats + unusualActivity + sectorFlow
-    02-setup-finder.mjs         # runScreener → edgeXray → strategyIdeas
+    02-setup-finder.mjs         # runScreener → ivRank + strategyIdeas
     03-gamma-check.mjs          # gexOverview + gexTicker one-shot
     04-earnings-radar.mjs       # earningsFlow + ivRank for the week ahead
     README.md
@@ -146,11 +146,13 @@ const [stats, flow, sectors] = await Promise.all([
 
 ```js
 // 02-setup-finder.mjs — "find me a CSP-wheel setup"
-const ideas = await td.runScreener("csp-wheel", { limit: 10 });
-for (const s of ideas.slice(0, 3)) {
-  const xray = await td.edgeXray(s.symbol);       // why it scored
-  const plan = await td.strategyIdeas(s.symbol);  // concrete structures
-  // → LLM ranks + explains the top setup
+const { results } = await td.runScreener("csp-wheel", { limit: 10 });
+for (const row of results.slice(0, 3)) {
+  const [iv, ideas] = await Promise.all([
+    td.ivRank(row.ticker),        // rich or cheap?
+    td.strategyIdeas(row.ticker), // concrete structures
+  ]);
+  // → hand row + iv + ideas to an LLM to rank + explain the top setup
 }
 ```
 
@@ -165,23 +167,22 @@ local MCP config, or pasted into the OAuth authorize page (hash stored, never
 the raw key). **No secrets in this repo.** This is the safe pattern; unlike a
 public embed, an MCP config lives on the user's own machine.
 
-## Build milestones
+## What's inside
 
-1. `connectors/` — Cursor + Claude Desktop JSON, Claude Connectors OAuth
-   walkthrough with screenshots, generic-client doc.
-2. `prompts/README.md` — curated prompt library grouped by tool.
-3. `examples/` — 3–4 agents on `@traderdaddy/sdk` (research recap, setup finder,
-   gamma check, earnings radar). Keyless-first, live via `TD_API_KEY`.
-4. `scripts/get-your-key.md` — "get your key" walkthrough linking the Developer
-   API upgrade.
+- `connectors/` — Cursor + Claude Desktop JSON, the Claude Connectors OAuth
+  walkthrough, and a generic-client doc.
+- `prompts/README.md` — the curated prompt library, grouped by tool.
+- `examples/` — four agents on `@traderdaddy/sdk` (research recap, setup finder,
+  gamma check, earnings radar). Keyless-first, live via `TD_API_KEY`.
+- `scripts/get-your-key.md` — the "get your key" walkthrough linking the
+  Developer API upgrade.
 
-## Picking this up in a new session
+## Contributing
 
-The server side already exists (public `/api/v1/mcp` endpoint + OAuth shim), so
-this is **packaging and examples, not backend work.** The connector docs are
-independent of everything; the example agents depend only on the already-built
-[`@traderdaddy/sdk`](https://github.com/mphinance/traderdaddy-sdk) (v0.1.0, its
-method names are in the sketches above). Good parallel-track project any time.
+This is **packaging and examples, not backend work** — the server side already
+exists (public `/api/v1/mcp` endpoint + OAuth shim). Adding a connector, an
+example agent, or prompts? Grab a prompt from [`PROMPTS.md`](PROMPTS.md) and see
+[`CLAUDE.md`](CLAUDE.md) for the repo's conventions.
 
 ## License
 
