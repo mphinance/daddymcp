@@ -15,6 +15,9 @@ alongside [DaddyBoard](https://github.com/mphinance/daddyboard) (wall display),
 [DaddyLens](https://github.com/mphinance/daddylens) (browser extension), and
 [DaddyBot](https://github.com/mphinance/daddybot) (Discord bot).
 
+**Extending it?** Grab a prompt from [`PROMPTS.md`](PROMPTS.md) and paste it into
+Claude Code / Cursor. Agents working in this repo should read [`CLAUDE.md`](CLAUDE.md).
+
 ---
 
 ## Why this exists
